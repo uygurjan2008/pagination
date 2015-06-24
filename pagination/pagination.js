@@ -44,6 +44,10 @@ function pagination(data, pagesize, target1, target2, fn) {
 	var add_my_event;
 	if (fn instanceof Function) {
 		add_my_event = fn;
+	}else{
+		add_my_event=function(){
+			
+		}
 	}
 
 	var data_on_page = [];
