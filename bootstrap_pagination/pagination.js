@@ -1,4 +1,3 @@
-
 function pagination(data, pagesize, target1, target2) {
 	var data_on_page = [];
 	var a_style = "position: relative;float: left;"
@@ -7,6 +6,12 @@ function pagination(data, pagesize, target1, target2) {
 			+ "text-decoration: none;  background-color: #fff;"
 			+ "border: 1px solid #ddd;";
 	var li_style = "display: inline;";
+	var span_style = "position: relative;" + " float: left;"
+			+ " padding: 6px 12px;" + "margin-left: -1px;"
+			+ "line-height: 1.42857143;" + "color: #337ab7;"
+			+ "text-decoration: none;" + "background-color: #fff;"
+			+ "border: 1px solid #ddd;";
+	
 	var dt = data_page(data, pagesize);
 	var tmps = "<div class='col-md-12' style='/*border:1px solid;border-radius:10px;*/'>"
 			+ "<ul class='pagination' style='margin:0px;margin:0px;display: inline-block;"
@@ -21,7 +26,7 @@ function pagination(data, pagesize, target1, target2) {
 			+ a_style
 			+ "\"  class='btn btn-default go'>GO</a><input type='text' class='p_number' style='width:60px;height:30px;' />"
 			+ "</li>";
-	var p_all = "<li style=\"" + li_style + "\"><span>总共" + dt.length
+	var p_all = "<li style=\"" + li_style + "\"><span style=\""+span_style+"\">总共" + dt.length
 			+ "页</span></li>";
 	var p_end = "<li style=\"" + li_style
 			+ "\"><span class=\"page_end\" >最后一页</span></li>";
@@ -63,8 +68,6 @@ function pagination(data, pagesize, target1, target2) {
 			+ "</ul></div>";
 	target1.html(page_html);
 
-	
-
 	var cl = $(".pagination li a[class]");
 	var selected;
 	for (var i = 0; i < cl.length; i++) {
@@ -73,6 +76,12 @@ function pagination(data, pagesize, target1, target2) {
 		}
 	}
 	target2.html(dt[0]);
+	var pages = $(".pagination li a[page]");
+	 
+	$(pages[0]).attr("style", a_style+"background: rgb(32, 163, 153);");
+	$(pages[0]).addClass("selected");
+	
+	
 	add_my_event();
 
 	$("ul li .next", target1).click(
@@ -121,7 +130,7 @@ function pagination(data, pagesize, target1, target2) {
 				}
 				data_on_page = [];
 				data_on_page = dt[sd - 1];
-				
+
 				target2.html(data_on_page);
 				add_my_event();
 			});
@@ -166,7 +175,7 @@ function pagination(data, pagesize, target1, target2) {
 				}
 				data_on_page = [];
 				data_on_page = dt[sd - 1];
-				
+
 				target2.html(data_on_page);
 				add_my_event();
 			});
@@ -180,32 +189,24 @@ function pagination(data, pagesize, target1, target2) {
 			}
 			var pages = $(".pagination li a[page]");
 			for (var i = 0; i < pages.length; i++) {
-				$(pages[i]).attr("style", "");
+				$(pages[i]).attr("style", a_style);
 				$(pages[i]).removeClass("selected");
 			}
-			$(this).attr("style", "background: rgb(32, 163, 153);");
+			$(this).attr("style", a_style+"background: rgb(32, 163, 153);");
 			$(this).addClass("selected");
 			data_on_page = dt[pagenumber - 1];
 		}
 		data_on_page = [];
 		data_on_page = dt[pagenumber - 1];
-		
+
 		target2.html(data_on_page);
 		add_my_event();
 	});
-	
-	
-	function add_my_event(){
-		
-		
-		
-		
+
+	function add_my_event() {
+
 	}
-	
-	
-	
-	
-	
+
 }
 
 function data_page(d, pagesize) {
