@@ -1,4 +1,10 @@
-function pagination(data, pagesize, target1, target2) {
+function pagination(data, pagesize, target1, target2, fn) {
+
+	var add_my_event;
+	if (fn instanceof Function) {
+		add_my_event = fn;
+	}
+
 	var data_on_page = [];
 	var a_style = "position: relative;float: left;"
 			+ "padding: 6px 12px; margin-left: -1px;"
@@ -11,23 +17,22 @@ function pagination(data, pagesize, target1, target2) {
 			+ "line-height: 1.42857143;" + "color: #337ab7;"
 			+ "text-decoration: none;" + "background-color: #fff;"
 			+ "border: 1px solid #ddd;";
-	
+
 	var dt = data_page(data, pagesize);
-	var tmps = "<div class='col-md-12' style='/*border:1px solid;border-radius:10px;*/'>"
-			+ "<ul class='pagination' style='margin:0px;margin:0px;display: inline-block;"
+	var tmps = "<ul class='pagination' style='margin:0px;margin:0px;display: inline-block;"
 			+ "padding-left: 0;margin: 20px 0;border-radius: 4px;'>";
 	var p_before = "<li style=\"" + li_style + "\"><a style=\"" + a_style
-			+ "\" class='previous btn btn-default'>&laquo;上5页</a></li>";
+			+ "\" class='previous  '>&laquo;上5页</a></li>";
 	var p_next = "<li style=\"" + li_style + "\"><a style=\"" + a_style
-			+ "\"  class='next btn btn-default'>下5页&raquo;</a></li>";
+			+ "\"  class='next  '>下5页&raquo;</a></li>";
 	var p_goto = "<li style=\""
 			+ li_style
 			+ "\"><a style=\""
 			+ a_style
-			+ "\"  class='btn btn-default go'>GO</a><input type='text' class='p_number' style='width:60px;height:30px;' />"
+			+ "\"  class='  go'>GO</a><input type='text' class='p_number' style='width:60px;height:30px;' />"
 			+ "</li>";
-	var p_all = "<li style=\"" + li_style + "\"><span style=\""+span_style+"\">总共" + dt.length
-			+ "页</span></li>";
+	var p_all = "<li style=\"" + li_style + "\"><span style=\"" + span_style
+			+ "\">总共" + dt.length + "页</span></li>";
 	var p_end = "<li style=\"" + li_style
 			+ "\"><span class=\"page_end\" >最后一页</span></li>";
 	var p_start = "<li style=\"" + li_style
@@ -65,7 +70,7 @@ function pagination(data, pagesize, target1, target2) {
 	}
 
 	var page_html = tmps + p_before + pages_num + p_next + p_all
-			+ "</ul></div>";
+			+ "</ul>";
 	target1.html(page_html);
 
 	var cl = $(".pagination li a[class]");
@@ -77,11 +82,10 @@ function pagination(data, pagesize, target1, target2) {
 	}
 	target2.html(dt[0]);
 	var pages = $(".pagination li a[page]");
-	 
-	$(pages[0]).attr("style", a_style+"background: rgb(32, 163, 153);");
+
+	$(pages[0]).attr("style", a_style + "background: rgb(32, 163, 153);");
 	$(pages[0]).addClass("selected");
-	
-	
+
 	add_my_event();
 
 	$("ul li .next", target1).click(
@@ -192,7 +196,7 @@ function pagination(data, pagesize, target1, target2) {
 				$(pages[i]).attr("style", a_style);
 				$(pages[i]).removeClass("selected");
 			}
-			$(this).attr("style", a_style+"background: rgb(32, 163, 153);");
+			$(this).attr("style", a_style + "background: rgb(32, 163, 153);");
 			$(this).addClass("selected");
 			data_on_page = dt[pagenumber - 1];
 		}
@@ -203,9 +207,16 @@ function pagination(data, pagesize, target1, target2) {
 		add_my_event();
 	});
 
-	function add_my_event() {
+	var aaa = 1;
 
-	}
+	/*
+	 * function add_my_event() { console.log("call:"+(aaa++)); if (fnn
+	 * instanceof Function) {
+	 * 
+	 * fnn.call(this); }
+	 * 
+	 * //return fnn; }
+	 */
 
 }
 
